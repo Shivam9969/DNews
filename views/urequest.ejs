@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>User Requests </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 2;
+  margin-top: 50px;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #189AB4;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color:#189AB4;
+  color: white;
+}
+.fa:hover{
+    color: white;
+}
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+  input.ng-invalid {
+    background-color:pink;
+    }
+    input.ng-valid {
+      background-color:lightgreen;
+    }
+</style>
+</head>
+<body onload="getloc();" ng-app="">
+  <nav class="navbar bg-info navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">DNews</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href=><span class="glyphicon glyphicon-user"></span>
+              <%=name%>
+            </a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                class="glyphicon glyphicon-log-in"></span>More</a>
+            <ul class="dropdown-menu">
+              <li><a href="/">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+      <div class="sidebar">
+        <a  href="/uhome"><i class="fa fa-home" style="font-size:20px;"></i>&nbsp;&nbsp;Home</a>
+        <a class="active" href="/urequest"><i class="fa  fa-star" style="font-size:20px;color:black"></i>&nbsp;&nbsp;Create Request</a>
+        <a href="/ustock"><i class="fa fa-area-chart" style="font-size:20px;color:black"></i>&nbsp;&nbsp;Check Stock</a>
+      </div>
+
+<div class="content" style="padding-left: 300px;padding-top: 7%;">
+    <div class="card" style="padding-left:10px;padding-right:10px;width: 360px;left:70%;padding-top:2;border: 2px solid black;">
+        <div class="card-body">
+            <form ng-model="myName" class="form-horizontal" action="/urequest" method="post" >
+            
+    <div class="form-group " style="width: 108%;">
+      <label class="control-label" for="name">&nbsp;&nbsp;&nbsp;&nbsp;Name:</label>
+      <div class="col-sm-12">
+        <input type="text" minlength="2" maxlength="20" pattern="[A-Za-z].{2,}" class="form-control" id="name" placeholder="Enter Name" name="uname" ng-model="uname" required>
+      </div>
+    </div>
+    <div class="form-group " style="width: 108%;">
+      <label class="control-label" for="drop">&nbsp;&nbsp;&nbsp;&nbsp;NewsPaper Type:</label>
+      <div class="col-sm-12">
+          <select name="note" id="drop" class="form-control" style="width: 100%">
+              <option value="NBT">NBT</option>
+              <option value="TOI">TOI</option>
+              <option value="HT">HT</option>
+              <option value="MM">MM</option>
+              <option value="TIE">TIE</option>
+            </select>
+            
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="phno">&nbsp;&nbsp;&nbsp;&nbsp;Phone:</label>
+        <div class="col-sm-12">          
+          <input type="text" pattern="\d*" minlength="10" maxlength="10" class="form-control" id="phno" placeholder="Phno" name="phno" ng-model="phno"  required>
+        </div>
+    </div>
+    <div class="form-group " style="width: 108%;">
+        <label class="control-label" for="drop">&nbsp;&nbsp;&nbsp;&nbsp;Area:</label>
+        <div class="col-sm-12">
+            <select name="area" id="drop" class="form-control" style="width: 100%">
+                <option value="Kandivali">Kandivali</option>
+                <option value="Borivali">Borivali</option>
+                <option value="Goregaon">Goregaon</option>
+              </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="add">&nbsp;&nbsp;&nbsp;&nbsp;Address:</label>
+        <div class="col-sm-12">          
+          <input type="text"  minlength="2" maxlength="100" class="form-control" id="add" placeholder="Address" name="add" ng-model="add" required>
+        </div>
+      </div<br><br>
+      <input type="hidden" id="lat" name="lat">
+      <input type="hidden" id="lon" name="lon">
+    <div class="form-group">        
+      <div class="col-sm-offset-1 col-sm-9">
+        <button type="submit" class="btn btn-default btn-success" style="width: 110%;margin-top: 15px;">Submit Request</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+<script>
+  function getloc() {
+      if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+
+        function showPosition(position) {
+          document.getElementById("lat").value= position.coords.latitude;
+          document.getElementById("lon").value=position.coords.longitude
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<html>
+    <head>
+      <style>
+        input.ng-invalid {
+    background-color:pink;
+    }
+    input.ng-valid {
+      background-color:lightgreen;
+    }
+      </style>
+        <title>User Login Page</title>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+      </head>
+<body style="background-image: url('Img/News.jpg');" ng-app="">
+  <% if(typeof err !='undefined' ) { %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <%= err %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <% } %>
+    <div class="card text-center" style="width: 500px;left:30%;margin-top: 10%">
+        <div class="card-header bg-info" style="color: white">
+          User Login
+        </div>
+        <div class="card-body">
+            <form  ng-model="myName" required class="form-horizontal" action="/uhome" method="post">
+    <div class="form-group " style="width: 100%;">
+      <label class="control-label" for="email">Email:</label>
+      <div class="col-sm-12">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"  ng-model="email" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="pwd">Password:</label>
+      <div class="col-sm-12">          
+        <input type="password" minlength="8" maxlength="29" class="form-control" id="pwd" placeholder="Enter password" name="pwd"  ng-model="pwd" required>
+      </div>
+    </div><br><br>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-12">
+        <button type="submit" class="btn btn-default btn-success" style="width: 100%;"><a>Login</button>
+      </div>
+    </div>
+  </form>
+        </div>
+        <div class="card-footer text-muted bg-info" style="color: white">
+          <a href="/signup">Signup ?</a>
+        </div>
+      </div>
+    <script>
+      let animation = anime({
+        targets: '.card',
+        // Properties
+        scaleY: 200,
+        // Property Parameters
+        duration: 500,
+
+        easing: 'linear',
+        // Animation Parameters
+        direction: 'alternate'
+      });
+    </script>
+</body>
+
+</html>

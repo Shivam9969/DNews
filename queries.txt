@@ -1,0 +1,318 @@
+Server [localhost]: localhost
+Database [postgres]: dnews
+Port [5432]: 5432
+Username [postgres]: postgres
+Password for user postgres:
+psql (9.6.21)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+dnews=# create table user(name varchar(20),emailid varchar(100) primary key,password varchar(30),phno varchar(12),area varchar(20),address varchar(100));
+ERROR:  syntax error at or near "user"
+LINE 1: create table user(name varchar(20),emailid varchar(100) prim...
+                     ^
+dnews=# create table user(emailid varchar(100) primary key,name varchar(20) not null,password varchar(30) not null,phno varchar(12) not null,area varchar(20) not null,address varchar(100) not null);
+ERROR:  syntax error at or near "user"
+LINE 1: create table user(emailid varchar(100) primary key,name varc...
+                     ^
+dnews=# create table genuser(emailid varchar(100) primary key,name varchar(20) not null,password varchar(30) not null,phno varchar(12) not null,area varchar(20) not null,address varchar(100) not null);
+CREATE TABLE
+dnews=# create table venuser(emailid varchar(100) primary key,name varchar(20) not null,password varchar(30) not null,phno varchar(12) not null,area varchar(20) not null,address varchar(100) not null);
+CREATE TABLE
+dnews=# insert into genuser(
+dnews(# j;aydeepsingh@gmail.com
+dnews(# ;
+dnews(# );
+ERROR:  syntax error at or near ";"
+LINE 2: j;aydeepsingh@gmail.com
+         ^
+dnews=# insert into genuser values ( 'jaydeepsingh@hmail.com', 'Jaydeep', '12345','9898789876','Kandivali','Charkop');
+INSERT 0 1
+dnews=# insert into genuser values ( 'shivam@gmail.com', 'Shivam', '1234','9834789876','Kandivali','Sahaydri');
+INSERT 0 1
+dnews=# select * from venuser;
+     emailid      |   name    | password |    phno    |   area    | address
+------------------+-----------+----------+------------+-----------+---------
+ vendor@gmail.com | undefined | 1233456  | 9898989898 | Kandivali | Charkop
+(1 row)
+
+
+dnews=# select * from venuser;
+      emailid      |   name    | password |    phno    |   area    |    address
+-------------------+-----------+----------+------------+-----------+---------------
+ vendor@gmail.com  | undefined | 1233456  | 9898989898 | Kandivali | Charkop
+ vendor2@gmail.com | Vendor2   | 1234     | 9898989890 | Borivali  | National Park
+(2 rows)
+
+
+dnews=# select * from genuser;
+        emailid         |  name   | password |    phno    |   area    |    address
+------------------------+---------+----------+------------+-----------+---------------
+ jaydeepsingh@hmail.com | Jaydeep | 12345    | 9898789876 | Kandivali | Charkop
+ shivam@gmail.com       | Shivam  | 1234     | 9834789876 | Kandivali | Sahaydri
+ user1@gmail.com        | User1   | 123      | 9890989098 | Borivali  | National Park
+(3 rows)
+
+
+dnews=# create table user_request (req_id primary key auto_increment, name varchar(20, note varchar(100),phno varchar(11), area varchar(20), addr varchar(20));
+dnews(# ;
+dnews(# );
+ERROR:  syntax error at or near "primary"
+LINE 1: create table user_request (req_id primary key auto_increment...
+                                          ^
+dnews=# create table user_request (req_id primary key auto_increment, name varchar(20), note varchar(100),phno varchar(11), area varchar(20), addr varchar(20));
+ERROR:  syntax error at or near "primary"
+LINE 1: create table user_request (req_id primary key auto_increment...
+                                          ^
+dnews=# create table user_request (req_id int primary key auto_increment, name varchar(20), note varchar(100),phno varchar(11), area varchar(20), addr varchar(20));
+ERROR:  syntax error at or near "auto_increment"
+LINE 1: create table user_request (req_id int primary key auto_incre...
+                                                          ^
+dnews=# create table user_request (req_id int primary key serial, name varchar(20), note varchar(100),phno varchar(11), area varchar(20), addr varchar(20));
+ERROR:  syntax error at or near "serial"
+LINE 1: create table user_request (req_id int primary key serial, na...
+                                                          ^
+dnews=# create table user_request (req_id serial primary key, name varchar(20), note varchar(100),phno varchar(11), area varchar(20), addr varchar(20));
+CREATE TABLE
+dnews=# insert into user_request values ('Shiv','NBT','9898989890','Malad','Charkop');
+ERROR:  invalid input syntax for integer: "Shiv"
+LINE 1: insert into user_request values ('Shiv','NBT','9898989890','...
+                                         ^
+dnews=# insert into user_request values (1,'Shiv','NBT','9898989890','Malad','Charkop');
+INSERT 0 1
+dnews=# insert into user_request values ('Shiv2','NBT','9898989890','Malad','Charkop');
+ERROR:  invalid input syntax for integer: "Shiv2"
+LINE 1: insert into user_request values ('Shiv2','NBT','9898989890',...
+                                         ^
+dnews=# insert into user_request(name,note,phno,area,addr) values ('Shiv2','NBT','9898989890','Malad','Charkop');
+ERROR:  duplicate key value violates unique constraint "user_request_pkey"
+DETAIL:  Key (req_id)=(1) already exists.
+dnews=# truncate user_request;
+TRUNCATE TABLE
+dnews=# insert into user_request(name,note,phno,area,addr) values ('Shiv2','NBT','9898989890','Malad','Charkop');
+INSERT 0 1
+dnews=# insert into user_request(name,note,phno,area,addr) values ('Shiv3','NBT','9898989890','Malad','Charkop');
+INSERT 0 1
+dnews=# select * from user_request;
+ req_id | name  | note |    phno    | area  |  addr
+--------+-------+------+------------+-------+---------
+      2 | Shiv2 | NBT  | 9898989890 | Malad | Charkop
+      3 | Shiv3 | NBT  | 9898989890 | Malad | Charkop
+(2 rows)
+
+
+dnews=# truncate user_request;
+TRUNCATE TABLE
+dnews=# select * from user_request;
+ req_id | name | note | phno | area | addr
+--------+------+------+------+------+------
+(0 rows)
+
+
+dnews=# select * from user_request;
+ req_id | name | note | phno | area | addr
+--------+------+------+------+------+------
+(0 rows)
+
+
+dnews=# truncate user_request;
+TRUNCATE TABLE
+dnews=# truncate user_request;
+TRUNCATE TABLE
+dnews=# select * from user_request;
+ req_id | name | note | phno | area | addr
+--------+------+------+------+------+------
+(0 rows)
+
+
+dnews=# select * from user_request;
+ req_id |  name  | note |    phno    |   area    |  addr
+--------+--------+------+------------+-----------+---------
+      6 | Shivam | NBT  | 9090909090 | Kandivali | Charkop
+(1 row)
+
+
+dnews=# alter table user_request add column status varchar(20) set default 'incomplete';
+ERROR:  syntax error at or near "set"
+LINE 1: ... table user_request add column status varchar(20) set defaul...
+                                                             ^
+dnews=# alter table user_request add column status varchar(20) default 'incomplete';
+ALTER TABLE
+dnews=# truncate user_request;
+TRUNCATE TABLE
+dnews=# select * from user_request;
+ req_id |  name  | note |    phno    |   area    |  addr   |   status
+--------+--------+------+------------+-----------+---------+------------
+      7 | Shivam | NBT  | 9090909090 | Kandivali | Charkop | incomplete
+      8 | Shivam | NBT  | 9090909090 | Kandivali | Charkop | incomplete
+(2 rows)
+
+
+dnews=# alter table user_request add column rdate varchar(30);
+ALTER TABLE
+dnews=# create table stock_paper (pname varchar(30), count int);
+CREATE TABLE
+dnews=# alter table stock_paper add column area varchar(20);
+ALTER TABLE
+dnews=# insert into stock_paper values ('NBT',10,'Kandivali');
+INSERT 0 1
+dnews=# insert into stock_paper values ('TOI',10,'Kandivali');
+INSERT 0 1
+dnews=# insert into stock_paper values ('MM',10,'Kandivali');
+INSERT 0 1
+dnews=# insert into stock_paper values ('HT',10,'Kandivali');
+INSERT 0 1
+dnews=# insert into stock_paper values ('NBT',10,'Malad');
+INSERT 0 1
+dnews=# insert into stock_paper values ('TOI',10,'Malad');
+INSERT 0 1
+dnews=# insert into stock_paper values ('MM',10,'Malad');
+INSERT 0 1
+dnews=# insert into stock_paper values ('HT',10,'Malad');
+INSERT 0 1
+dnews=# insert into stock_paper values ('NBT',10,'Borivali');
+INSERT 0 1
+dnews=# insert into stock_paper values ('TOI',10,'Borivali');
+INSERT 0 1
+dnews=# insert into stock_paper values ('MM',10,'Borivali');
+INSERT 0 1
+dnews=# insert into stock_paper values ('HT',10,'Borivali');
+INSERT 0 1
+dnews=# select * from stock_paper;
+ pname | count |   area
+-------+-------+-----------
+ NBT   |    10 | Kandivali
+ TOI   |    10 | Kandivali
+ MM    |    10 | Kandivali
+ HT    |    10 | Kandivali
+ NBT   |    10 | Malad
+ TOI   |    10 | Malad
+ MM    |    10 | Malad
+ HT    |    10 | Malad
+ NBT   |    10 | Borivali
+ TOI   |    10 | Borivali
+ MM    |    10 | Borivali
+ HT    |    10 | Borivali
+(12 rows)
+
+
+dnews=# select area,count from stock_paper group by area;
+ERROR:  column "stock_paper.count" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select area,count from stock_paper group by area;
+                    ^
+dnews=# select area,count(count) from stock_paper group by area;
+   area    | count
+-----------+-------
+ Kandivali |     4
+ Malad     |     4
+ Borivali  |     4
+(3 rows)
+
+
+dnews=# select area,sum(count) from stock_paper group by area;
+   area    | sum
+-----------+-----
+ Kandivali |  40
+ Malad     |  40
+ Borivali  |  40
+(3 rows)
+
+
+dnews=# select area,sum(count) from stock_paper group by area,pname;
+   area    | sum
+-----------+-----
+ Borivali  |  10
+ Borivali  |  10
+ Kandivali |  10
+ Borivali  |  10
+ Malad     |  10
+ Borivali  |  10
+ Malad     |  10
+ Kandivali |  10
+ Malad     |  10
+ Kandivali |  10
+ Kandivali |  10
+ Malad     |  10
+(12 rows)
+
+
+dnews=# select pname,area,sum(count) from stock_paper group by area,pname;
+ pname |   area    | sum
+-------+-----------+-----
+ MM    | Borivali  |  10
+ HT    | Borivali  |  10
+ TOI   | Kandivali |  10
+ NBT   | Borivali  |  10
+ TOI   | Malad     |  10
+ TOI   | Borivali  |  10
+ NBT   | Malad     |  10
+ NBT   | Kandivali |  10
+ MM    | Malad     |  10
+ MM    | Kandivali |  10
+ HT    | Kandivali |  10
+ HT    | Malad     |  10
+(12 rows)
+
+
+dnews=# select pname,area,sum(count) from stock_paper group by cube(area,pname);
+ pname |   area    | sum
+-------+-----------+-----
+ HT    | Borivali  |  10
+ MM    | Borivali  |  10
+ NBT   | Borivali  |  10
+ TOI   | Borivali  |  10
+       | Borivali  |  40
+ HT    | Kandivali |  10
+ MM    | Kandivali |  10
+ NBT   | Kandivali |  10
+ TOI   | Kandivali |  10
+       | Kandivali |  40
+ HT    | Malad     |  10
+ MM    | Malad     |  10
+ NBT   | Malad     |  10
+ TOI   | Malad     |  10
+       | Malad     |  40
+       |           | 120
+ HT    |           |  30
+ MM    |           |  30
+ NBT   |           |  30
+ TOI   |           |  30
+(20 rows)
+
+
+dnews=# select pname,area,sum(count) from stock_paper group by rollup(area,pname);
+ pname |   area    | sum
+-------+-----------+-----
+ HT    | Borivali  |  10
+ MM    | Borivali  |  10
+ NBT   | Borivali  |  10
+ TOI   | Borivali  |  10
+       | Borivali  |  40
+ HT    | Kandivali |  10
+ MM    | Kandivali |  10
+ NBT   | Kandivali |  10
+ TOI   | Kandivali |  10
+       | Kandivali |  40
+ HT    | Malad     |  10
+ MM    | Malad     |  10
+ NBT   | Malad     |  10
+ TOI   | Malad     |  10
+       | Malad     |  40
+       |           | 120
+(16 rows)
+
+
+dnews=# select pname,area,sum(count) from stock_paper group by pname;
+ERROR:  column "stock_paper.area" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select pname,area,sum(count) from stock_paper group by pname...
+                     ^
+dnews=# select pname,sum(count) from stock_paper group by pname;
+ pname | sum
+-------+-----
+ TOI   |  30
+ HT    |  30
+ MM    |  30
+ NBT   |  30
+(4 rows)

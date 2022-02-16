@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+</head>
+<body>
+<nav class="navbar bg-info navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"  style="color: black;"></span>
+        <span class="icon-bar"  style="color: black;"></span>
+        <span class="icon-bar"  style="color: black;"></span>
+      </button>
+      <a class="navbar-brand" href="#">DNews</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+            class="glyphicon glyphicon-log-in"></span> Login</a>
+        <ul class="dropdown-menu">
+          <li><a href="/ulogin">User Login</a></li>
+          <li><a href="/vlogin">Vendor Login</a></li>
+          <li><a href="/alogin">Admin Login</a></li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  </div>
+</nav>
+  <br><br>
+<div class="container" style="float: right">
+    <div class="card" style="width:100%;height: 400px;">
+        <img class="card-img-top" src="Img/News.jpg" alt="Card image" style="width:90%;height: 90%">
+        <div class="card-body center">
+            <br>
+          <center><a href="/signup" class="btn btn-success">Get Started</a></center>
+        </div>
+      </div>
+
+      <br><br>
+  <div class="card" style="width:350px;float: left;margin-left: 10px; margin-right: 10px;">
+    <img class="card-img-top" src="Img/News1.jpg" alt="Card image" style="width:90%;height: 90%">
+    <div class="card-body">
+      <h4 class="card-title">TImes Of India</h4>
+      <p class="card-text">Click below</p>
+      <button type="button" id="a" onclick="abc(this.id);" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">View more</button>
+    </div>
+  </div>
+
+  <div class="card" style="width:350px;float: left; margin-left: 10px; margin-right: 10px;">
+    <img class="card-img-top" src="Img/News2.jpg" alt="Card image" style="width:90%;height: 90%">
+    <div class="card-body">
+      <h4 class="card-title">The Indian Express</h4>
+      <p class="card-text">Click below</p>
+      <button type="button" id="b" onclick="abc(this.id);" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">View more</button>
+    </div>
+  </div>
+
+  <div class="card" style="width:350px;float: left;margin-left: 10px; margin-right: 10px;">
+    <img class="card-img-top" src="Img/News3.jpg" alt="Card image" style="width:90%;height: 90%">
+    <div class="card-body">
+      <h4 class="card-title">NavBharat Times</h4>
+      <p class="card-text">Click below</p>
+      <button type="button" id="c"  onclick="abc(this.id);" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">View more</button>
+    </div>
+  </div>
+
+  <div class="card" style="width:350px;float: left;margin-left: 10px; margin-right: 10px;">
+    <img class="card-img-top" src="Img/News4.jpg" alt="Card image" style="width:90%;height: 90%">
+    <div class="card-body">
+      <h4 class="card-title">Mumbai Mirror</h4>
+      <p class="card-text">Click below</p>
+      <button type="button" id="d"  onclick="abc(this.id);" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">View more</button>
+    </div>
+  </div>
+
+  <div class="card" style="width:350px;float: left;margin-left: 10px; margin-right: 10px;">
+    <img class="card-img-top" src="Img/News5.jpg" alt="Card image" style="width:90%;height: 90%">
+    <div class="card-body">
+      <h4 class="card-title">Hindustan Time</h4>
+      <p class="card-text">Click below</p>
+      <button type="button" id="e"  onclick="abc(this.id);" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">View more</button>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">About NewsPaper</h4>
+        </div>
+        <div class="modal-body">
+          <p id="chpara"> This is very famous news paper which cost 2 rs for each</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button"  onclick="abc(this.id);" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script>
+  function abc(val){
+      if(val==='a'){
+        document.getElementById("chpara").innerHTML = "Times of India<br>Price:Rs10<br>To Buy, Please Login/SignUp";
+      }
+      if (val === 'b') {
+         document.getElementById("chpara").innerHTML = "The Indian Express<br>Price:Rs10<br>To Buy, Please Login/SignUp";
+    }
+    if (val === 'c') {
+         document.getElementById("chpara").innerHTML = "NavBharat Times<br>Price:Rs10<br>To Buy, Please Login/SignUp";
+    }
+    if (val === 'd') {
+         document.getElementById("chpara").innerHTML = "Mumbai Mirror<br>Price:Rs8<br>To Buy, Please Login/SignUp";
+    }
+    if (val === 'e') {
+         document.getElementById("chpara").innerHTML = "Hindustan Times<br>Price:Rs5<br>To Buy, Please Login/SignUp";
+    }
+
+  }
+  let animation = anime({
+      targets: '.card',
+      // Properties 
+      scaleX:200,
+      // Property Parameters
+      duration: 670,
+      
+      easing: 'linear',
+      // Animation Parameters
+      direction: 'alternate'
+    });
+</script>
+</body>
+</html>

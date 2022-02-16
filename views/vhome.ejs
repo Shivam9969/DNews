@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Vendor Home Page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 2;
+  margin-top: 50px;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #189AB4;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color:#189AB4;
+  color: white;
+}
+.fa:hover{
+    color: white;
+}
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+</head>
+<body>
+  <nav class="navbar bg-info navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">DNews</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href=><span class="glyphicon glyphicon-user"></span>
+              <%=name%>
+            </a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                class="glyphicon glyphicon-log-in"></span>More</a>
+            <ul class="dropdown-menu">
+              <li><a href="/">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="sidebar">
+  <a class="active" href="/vhome"><i class="fa fa-inbox" style="font-size:20px;color:white"></i>&nbsp;&nbsp;Requests</a>
+  <a href="/vstock"><i class="fa fa-area-chart" style="font-size:20px;color:black"></i>&nbsp;&nbsp;Stocks</a>
+</div>
+
+<div class="content"><br><br><br><br>
+  <% if(userData.length!=0){ var i=1; userData.forEach(function(data){ %>
+    <div class="panel panel-primary">
+      <div class="panel-heading">Request&nbsp;&nbsp;<%=data.date %></div>
+      <div class="panel-body bg-warning">
+        <form class="form-horizontal" action="/vhome" method="post">
+          <input type="hidden" name="rid" value="<%=data.r_id%>">
+          <p>Name:<%=data.name %>
+          </p>
+          <input type="hidden" name="hname" value="<%=data.name %>">
+          <p>Note:<%=data.note %>
+          </p>
+          <input type="hidden" name="hnote" value="<%=data.note %>">
+          <p>Phone No.:<%=data.phno %>
+          </p>
+          <input type="hidden" name="hphno" value="<%=data.phno %>">
+          <p>Area:<%=data.area %>
+          </p>
+          <input type="hidden" name="harea" value="<%=data.area %>">
+          <p>Address:<%=data.addr %>
+          </p>
+          <input type="hidden" name="hadd" value="<%=data.addr %>">
+          <p>Status:<%=data.status %>
+          </p>
+          <input type="hidden" name="hstatus" value="Completed">
+          <br>
+          <input type="hidden" name="hlat" value="<%=data.lati%>">
+          <input type="hidden" name="hlon" value="<%=data.long%>">
+          <input type="submit" class="btn btn-success" value="Completed">
+        </form>
+        <form class="form-horizontal" action="/vhome" method="post">
+          <input type="hidden" name="rid" value="<%=data.r_id%>">
+          <input type="hidden" name="hname" value="<%=data.name %>">
+          <input type="hidden" name="hnote" value="<%=data.note %>">
+          <input type="hidden" name="hphno" value="<%=data.phno %>">
+          <input type="hidden" name="harea" value="<%=data.area %>">
+          <input type="hidden" name="hadd" value="<%=data.addr %>">
+          <input type="hidden" name="hstatus" value="Declined">
+          <input type="hidden" name="hlat" value="<%=data.lati%>">
+          <input type="hidden" name="hlon" value="<%=data.long%>">
+          <br>
+          <input type="submit" class="btn btn-danger" value="Declined">
+        </form>
+        <br>
+          <button class="btn btn-warning" onclick="abc('<%=data.lati%>','<%=data.long%>');" data-toggle="modal" data-target="#myModal">View Location</button>
+      </div>
+    </div>
+
+    <% i++; }) %>
+      <% } else{ %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">Request &nbsp;&nbsp;</div>
+          <div class="panel-body">
+            <p>No Data Found</p>
+          </div>
+        </div>
+        <% } %>
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+        
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">map View of User Location:</h4>
+              </div>
+              <div class="modal-body">
+                <div id="googleMap" style="width:100%;height:400px;"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+        
+          </div>
+        </div>
+</div>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHr7Zk-frP16J_4rrI6nyqGMNYEtQBVLs&callback=myMap"></script>
+<script>
+  function abc(a,b) {
+     var c = parseFloat(a);
+     var d = parseFloat(b);
+    var mapProp = {
+      center: new google.maps.LatLng(c, d),
+      zoom: 15,
+    };
+    const myLatLng = { lat: c, lng: d };
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      animation: google.maps.Animation.DROP
+    });
+    marker.setMap(map);
+
+    var d = parseFloat(a);
+    var e = parseFloat(b);
+
+    const myLatLng1 = { lat: d, lng: e };
+    var myCity = new google.maps.Circle({
+      center: myLatLng1,
+      radius: 50,
+      strokeColor: "#0000FF",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#0000FF",
+      fillOpacity: 0.4
+    });
+    myCity.setMap(map);
+  }
+
+    
+</script>
+<script>
+  let animation = anime({
+    targets: '.panel',
+    // Properties
+    translateY: 700,
+    // Property Parameters
+    duration: 500,
+
+    easing: 'linear',
+    // Animation Parameters
+    direction: 'alternate'
+  });
+</script>
+
+</body>
+</html>

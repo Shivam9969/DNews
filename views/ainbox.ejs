@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Admin Inbox</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 2;
+  margin-top: 50px;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #189AB4;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color:#189AB4;
+  color: white;
+}
+.fa:hover{
+    color: white;
+}
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="navbar bg-info navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">DNews</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href=><span class="glyphicon glyphicon-user"></span>
+            <%=name%>
+          </a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+              class="glyphicon glyphicon-log-in"></span>More</a>
+          <ul class="dropdown-menu">
+            <li><a href="/">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="sidebar">
+  <a  href="/ahome"><i class="fa fa-home" style="font-size:20px;"></i>&nbsp;&nbsp;Home</a>
+  <a class="active" href="/ainbox"><i class="fa fa-inbox" style="font-size:20px;color:black"></i>&nbsp;&nbsp;Inbox</a>
+  <a href="/astock"><i class="fa fa-area-chart" style="font-size:20px;color:black"></i>&nbsp;&nbsp;Stock</a>
+  <a href="/ausrdetail"><i class="fa fa-folder" style="font-size:20px;color:black"></i>&nbsp;&nbsp;userDeatails</a>
+</div>
+
+<div class="content"><br><br><br><br>
+  <% if(userData.length!=0){ var i=1; userData.forEach(function(data){ %>
+    <div class="panel panel-primary">
+      <div class="panel-heading">Request &nbsp;&nbsp;<%=data.date %></div>
+      <div class="panel-body bg-warning">
+        <form class="form-horizontal" action="/ainbox" method="post">
+          <input type="hidden" name="rid" value="<%=data.req_id%>">
+          <p>Name:<%=data.name %></p>
+          <input type="hidden" name="hname" value="<%=data.name %>">
+          <p>Paper Name:<%=data.note %></p>
+          <input type="hidden" name="hnote" value="<%=data.note %>">
+          <p>Phone No.:<%=data.phno %></p>
+          <input type="hidden" name="hphno" value="<%=data.phno %>">
+          <p>Area:<%=data.area %></p>
+          <input type="hidden" name="hemail" value="<%=data.email%>">
+          <p>Email:<%=data.email%>
+          </p>
+          <input type="hidden" name="harea" value="<%=data.area %>">
+          <p>Address:<%=data.addr %></p>
+          <input type="hidden" name="hadd" value="<%=data.addr %>">
+          <p>Status:<%=data.status %></p>
+          <input type="hidden" name="hstatus" value="Pending">
+          <input type="hidden" name="hlat" value="<%=data.lati%>">
+          <input type="hidden" name="hlon" value="<%=data.long%>">
+          <br>
+          <input type="submit" class="btn btn-success" value="Send Request">
+        </form>
+      </div>
+    </div>
+   
+    <% i++; }) %>
+        <% } else{ %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">Request &nbsp;&nbsp;</div>
+            <div class="panel-body">
+             <p>No Data Found</p>
+            </div>
+          </div>
+      <% } %>
+</div>
+
+</body>
+</html>
